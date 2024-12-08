@@ -53,24 +53,24 @@ project/\
 安装Python 3.9+和conda环境（可选）。
 进入 backend 目录：
 ```bash
-    cd backend
-    pip install -r requirements.txt
+cd backend
+pip install -r requirements.txt
 ```
 运行后端服务器：
 ```bash
-    uvicorn main:app --reload
+uvicorn main:app --reload
 ```
 默认服务器监听 http://127.0.0.1:8000
 
 ### 前端环境搭建
 进入 frontend 目录：
 ```bash
-    cd frontend
-    npm install
+cd frontend
+npm install
 ```
 开发模式下运行：
 ```bash
-    npm start
+npm start
 ```
 前端运行在 http://localhost:3000
 
