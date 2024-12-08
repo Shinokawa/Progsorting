@@ -5,7 +5,31 @@ from typing import List, Optional
 import pandas as pd
 from dateutil import parser
 from fastapi.middleware.cors import CORSMiddleware
+import csv
 
+def save_to_csv():
+    current_events = morning_events + afternoon_events
+    # 将事件列表写回 events.csv
+    with open("events.csv", "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        # 写入表头
+        writer.writerow(["时间","内容","类型","社团/表演者","补充说明","时长"])
+        for e in current_events:
+            # 将开始/结束时间组合成原来的格式：“HH:MM:SS-HH:MM:SS”
+            time_range = f"{e['start_time']}-{e['end_time']}"
+            # 将时长（秒）转换回原格式，比如 600秒 -> "10分钟0秒"
+            minutes = e["duration"] // 60
+            seconds = e["duration"] % 60
+            duration_str = f"{minutes}分钟{seconds}秒"
+
+            writer.writerow([
+                time_range,
+                e["title"],
+                e["type"],
+                e["group"] if e["group"] else "—",
+                e["note"] if e["note"] else "",
+                duration_str
+            ])
 app = FastAPI()
 
 # 启用CORS中间件
@@ -137,6 +161,7 @@ def reorder_events(req: ReorderRequest):
     morning_events = new_morning
     afternoon_events = new_afternoon
     recalculate_times()
+    save_to_csv()  # 保存到CSV
     return morning_events + afternoon_events
 
 @app.post("/api/update", response_model=List[Event])
@@ -159,6 +184,7 @@ def update_event(req: UpdateEventRequest):
     if not found:
         raise HTTPException(status_code=404, detail="Event not found")
     recalculate_times()
+    save_to_csv()  # 保存到CSV
     return morning_events + afternoon_events
 
 @app.post("/api/updatestarttime", response_model=List[Event])
@@ -169,6 +195,7 @@ def update_start_time(req: UpdateStartTimeRequest):
     if req.afternoon_start:
         AFTERNOON_START = req.afternoon_start
     recalculate_times()
+    save_to_csv()  # 保存到CSV
     return morning_events + afternoon_events
 
 
