@@ -29,23 +29,23 @@
 ## 项目结构
 
 project/\
-  ├─ backend/\
-  │   ├─ main.py              # FastAPI后端逻辑 \
-  │   ├─ events.csv           # 初始数据文件，后续修改亦写回该文件 \
-  │   └─ requirements.txt     # 后端Python依赖 \
-  ├─ frontend/ \
-  │   ├─ src/ \
-  │   │   ├─ App.js \
-  │   │   ├─ api.js \
-  │   │   ├─ components/ \
-  │   │   │   ├─ EventItem.js \
-  │   │   │   ├─ EventLists.js \
-  │   │   │   ├─ EditDialog.js \
-  │   │   │   └─ Portal.js \
-  │   │   └─ index.js \
-  │   ├─ package.json         # 前端NPM依赖说明 \
-  │   └─ ... \
-  └─ README.md                # 项目说明文档\
+├─ backend/\
+│   ├─ main.py              # FastAPI后端逻辑 \
+│   ├─ events.csv           # 初始数据文件，后续修改亦写回该文件 \
+│   └─ requirements.txt     # 后端Python依赖 \
+├─ frontend/ \
+│   ├─ src/ \
+│   │   ├─ App.js \
+│   │   ├─ api.js \
+│   │   ├─ components/ \
+│   │   │   ├─ EventItem.js \
+│   │   │   ├─ EventLists.js \
+│   │   │   ├─ EditDialog.js \
+│   │   │   └─ Portal.js \
+│   │   └─ index.js \
+│   ├─ package.json         # 前端NPM依赖说明 \
+│   └─ ... \
+└─ README.md                # 项目说明文档\
 
 
 ## 安装与运行
